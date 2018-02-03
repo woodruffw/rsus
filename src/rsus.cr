@@ -23,8 +23,24 @@ module RSUS
   end
 
   def self.slugify(file)
+    content_type = file.headers["Content-Type"]?
     prefix = Random::Secure.urlsafe_base64(@@config.slug_size)
-    suffix = Mime.to_ext(file.headers["Content-Type"]) || "dat"
+    suffix = if content_type.nil? || content_type == "application/octet-stream"
+               uploaded_filename = file.filename
+
+               # if the file was uploaded without a content-type (or with a useless one),
+               # try to guess the suffix from the filename (and fall back to bin)
+               if uploaded_filename && uploaded_filename.includes?(".")
+                 uploaded_filename.split(".", 2).last
+               else
+                 "bin"
+               end
+             else
+               # otherwise, try to get the extension from the content-type, falling back to
+               # bin if the content-type isn't known
+               Mime.to_ext(file.headers["Content-Type"]) || "bin"
+             end
+
     "#{prefix}.#{suffix}"
   end
 
