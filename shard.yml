@@ -1,0 +1,20 @@
+name: rsus
+version: 0.1.0
+
+authors:
+  - William Woodruff <william@tuffbizz.com>
+
+targets:
+  rsus:
+    main: src/rsus.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  mime:
+    github: spalger/crystal-mime
+    version: ~> 0.1
+
+crystal: 0.24.1
+
+license: MIT
