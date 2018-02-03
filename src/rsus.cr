@@ -29,8 +29,9 @@ module RSUS
   end
 
   def self.upload(file)
-    filename = File.join(@@config.store, slugify file)
-    File.open(filename, "w") do |dest|
+    filename = slugify file
+    filepath = File.join(@@config.store, filename)
+    File.open(filepath, "w") do |dest|
       IO.copy(file.tmpfile, dest)
     end
 
