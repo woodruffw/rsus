@@ -38,7 +38,7 @@ module RSUS
              else
                # otherwise, try to get the extension from the content-type, falling back to
                # bin if the content-type isn't known
-               Mime.to_ext(file.headers["Content-Type"]) || "bin"
+               Mime.to_ext(content_type) || "bin"
              end
 
     "#{prefix}.#{suffix}"
