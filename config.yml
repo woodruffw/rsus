@@ -1,5 +1,5 @@
 # the domain of the site to return links to
-site: "https://thing-in-itself.net"
+site: "https://thing-in-itself.net/i/"
 
 # the maximum upload size, in bytes
 max_size: 10485760
@@ -11,4 +11,4 @@ store: u
 slug_size: 16
 
 # the list of known tokens (i use UUIDs generated with `uuidgen`)
-tokens: [f99dba4b-f8cc-4025-9c3b-f0d239f25606]
+tokens: []
