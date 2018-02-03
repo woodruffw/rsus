@@ -14,6 +14,7 @@ $ shards build --production
 Set up:
 
 ```bash
+$ cp config.yml.example config.yml
 $ nano config.yml
 $ ./bin/rsus
 ```
