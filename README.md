@@ -50,6 +50,7 @@ $ curl -F auth=<your-token> -F file="@<your path>" <your endpoint>
 1. Maybe do de-duplication
 2. Maybe add a web interface
 3. Log uploads
+4. Optional EXIF/tag stripping
 
 ## Contributing
 
