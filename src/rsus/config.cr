@@ -9,7 +9,7 @@ module RSUS
       max_size: Int32,
       store: String,
       slug_size: Int32,
-      tokens: Array(String),
+      tokens: Hash(String, String),
     )
 
     def self.load : Config
@@ -20,7 +20,7 @@ module RSUS
     end
 
     def token?(auth)
-      tokens.includes?(auth)
+      tokens.has_key?(auth)
     end
   end
 end

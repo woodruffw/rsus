@@ -10,5 +10,6 @@ store: u
 # the size of the random slug, in bytes (base64 encoded)
 slug_size: 16
 
-# the list of known tokens (i use UUIDs generated with `uuidgen`)
-tokens: []
+# the map of known tokens to users (i use UUIDs generated with `uuidgen`)
+tokens:
+  2536ee65-1241-4133-9551-4e4adf09b228: william
