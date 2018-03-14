@@ -10,6 +10,8 @@ module RSUS
     file = env.params.files["file"]?
     auth = env.params.body["auth"]?
 
+    @@config.log(:post, {auth: auth, user: @@config.tokens[auth]?})
+
     next error("missing file") unless file
     next error("missing auth") unless auth
     next error("bad auth") unless @@config.token?(auth)
@@ -41,24 +43,31 @@ module RSUS
                Mime.to_ext(content_type) || "bin"
              end
 
-    "#{prefix}.#{suffix}"
+    "#{prefix}.#{suffix}".tap do |fn|
+      @@config.log(:slugify, {original_name: file.filename, saved_name: fn})
+    end
   end
 
   def self.upload(file)
     filename = slugify file
     filepath = File.join(@@config.store, filename)
+    url = File.join(@@config.site, filename)
+
     File.open(filepath, "w") do |dest|
       IO.copy(file.tmpfile, dest)
     end
 
-    {url: File.join(@@config.site, filename)}.to_json
+    @@config.log(:upload, {filepath: filepath, url: url})
+    {url: url}.to_json
   end
 
   def self.error(msg)
+    @@config.log(:error, {message: msg})
     {error: msg}.to_json
   end
 
   def self.run
+    @@config.log(:startup)
     Kemal.run
   end
 end

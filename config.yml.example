@@ -13,3 +13,6 @@ slug_size: 16
 # the map of known tokens to users (i use UUIDs generated with `uuidgen`)
 tokens:
   2536ee65-1241-4133-9551-4e4adf09b228: william
+
+# the relative logfile to write to
+logfile: "rsus.log"

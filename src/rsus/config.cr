@@ -10,6 +10,7 @@ module RSUS
       store: String,
       slug_size: Int32,
       tokens: Hash(String, String),
+      logfile: String,
     )
 
     def self.load : Config
@@ -21,6 +22,10 @@ module RSUS
 
     def token?(auth)
       tokens.has_key?(auth)
+    end
+
+    def log(event, body = {} of String => String)
+      Logger.log(logfile, {event: event, time: Time.now.epoch, body: body})
     end
   end
 end
