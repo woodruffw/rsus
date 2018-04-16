@@ -1,3 +1,6 @@
+# set this to "production" when deploying
+environment: development
+
 # the domain of the site to return links to
 site: "https://thing-in-itself.net/i/"
 
