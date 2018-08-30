@@ -1,5 +1,9 @@
 version: 1.0
 shards:
+  baked_file_system:
+    github: schovi/baked_file_system
+    commit: 24dbaf2180b872c0f0fc777b34e3759108959e6e
+
   exception_page:
     github: crystal-loot/exception_page
     version: 0.1.1
@@ -13,8 +17,8 @@ shards:
     version: 0.4.0
 
   mime:
-    github: spalger/crystal-mime
-    version: 0.1.1
+    github: woodruffw/crystal-mime
+    commit: eb7881b90f99804da0a25866f36dc8dda56227f3
 
   radix:
     github: luislavena/radix

@@ -7,28 +7,46 @@ module RSUS
   @@config = Config.load
 
   post "/" do |env|
-    file = env.params.files["file"]?
-    auth = env.params.body["auth"]?
+    auth = nil
+    meta = nil
+    body = nil
+
+    HTTP::FormData.parse(env.request) do |part|
+      case part.name
+      when "auth"
+        auth = part.body.gets_to_end
+      when "file"
+        # Falling back on Content-Length is overly conservative, but
+        # `part.size` is always nil for me (with a cURL client).
+        size = part.size || env.request.headers["Content-Length"]
+
+        break error("missing size") unless size
+        break error("file too large") unless size.to_i <= @@config.max_size
+
+        meta = part
+        body = part.body.gets_to_end
+      end
+    end
 
     @@config.log(:post, {auth: auth, user: @@config.tokens[auth]?})
 
-    next error("missing file") unless file
+    next error("missing file") unless meta && body
+
     next error("missing auth") unless auth
     next error("bad auth") unless @@config.token?(auth)
-    next error("file too large") unless file.tmpfile.stat.size <= @@config.max_size
 
-    upload file
+    upload meta, body
   end
 
   error 404 do
     error("it is a mystery")
   end
 
-  def self.slugify(file)
-    content_type = file.headers["Content-Type"]?
+  def self.slugify(meta)
+    content_type = meta.headers["Content-Type"]?
     prefix = Random::Secure.urlsafe_base64(@@config.slug_size)
     suffix = if content_type.nil? || content_type == "application/octet-stream"
-               uploaded_filename = file.filename
+               uploaded_filename = meta.filename
 
                # if the file was uploaded without a content-type (or with a useless one),
                # try to guess the suffix from the filename (and fall back to bin)
@@ -44,18 +62,16 @@ module RSUS
              end
 
     "#{prefix}.#{suffix}".tap do |fn|
-      @@config.log(:slugify, {original_name: file.filename, saved_name: fn})
+      @@config.log(:slugify, {original_name: meta.filename, saved_name: fn})
     end
   end
 
-  def self.upload(file)
-    filename = slugify file
+  def self.upload(meta, body)
+    filename = slugify meta
     filepath = File.join(@@config.store, filename)
     url = File.join(@@config.site, filename)
 
-    File.open(filepath, "w") do |dest|
-      IO.copy(file.tmpfile, dest)
-    end
+    File.write(filepath, body)
 
     @@config.log(:upload, {filepath: filepath, url: url})
     {url: url}.to_json

@@ -12,9 +12,9 @@ dependencies:
   kemal:
     github: kemalcr/kemal
   mime:
-    github: spalger/crystal-mime
-    version: ~> 0.1
+    github: woodruffw/crystal-mime
+    branch: crystal-0.26.1
 
-crystal: 0.24.1
+crystal: 0.26.1
 
 license: MIT
