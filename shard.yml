@@ -12,8 +12,8 @@ dependencies:
   kemal:
     github: kemalcr/kemal
   mime:
-    github: woodruffw/crystal-mime
-    branch: crystal-0.26.1
+    github: spalger/crystal-mime
+    branch: master
 
 crystal: 0.26.1
 
