@@ -63,7 +63,7 @@ module RSUS
                exts.first? || "bin"
              end
 
-    "#{prefix}.#{suffix}".tap do |fn|
+    "#{prefix}#{suffix}".tap do |fn|
       @@config.log(:slugify, {original_name: meta.filename, saved_name: fn})
     end
   end
