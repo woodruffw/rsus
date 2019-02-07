@@ -56,9 +56,11 @@ module RSUS
                  "bin"
                end
              else
+               exts = MIME.extensions(content_type)
+
                # otherwise, try to get the extension from the content-type, falling back to
                # bin if the content-type isn't known
-               Mime.to_ext(content_type) || "bin"
+               exts.first? || "bin"
              end
 
     "#{prefix}.#{suffix}".tap do |fn|

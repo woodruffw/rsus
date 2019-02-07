@@ -11,10 +11,8 @@ targets:
 dependencies:
   kemal:
     github: kemalcr/kemal
-  mime:
-    github: spalger/crystal-mime
     branch: master
 
-crystal: 0.26.1
+crystal: 0.27.2
 
 license: MIT

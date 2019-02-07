@@ -27,7 +27,7 @@ module RSUS
     end
 
     def log(event, body = {} of String => String)
-      Logger.log(logfile, {event: event, time: Time.now.epoch, body: body})
+      Logger.log(logfile, {event: event, time: Time.now.to_unix, body: body})
     end
   end
 end

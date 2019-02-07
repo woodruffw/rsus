@@ -1,26 +1,18 @@
 version: 1.0
 shards:
-  baked_file_system:
-    github: schovi/baked_file_system
-    commit: 24dbaf2180b872c0f0fc777b34e3759108959e6e
-
   exception_page:
     github: crystal-loot/exception_page
-    version: 0.1.1
+    version: 0.1.2
 
   kemal:
     github: kemalcr/kemal
-    version: 0.24.0
+    commit: 53609b3afaed7e9bb62badac8bab4603dd9b2cd5
 
   kilt:
     github: jeromegn/kilt
     version: 0.4.0
 
-  mime:
-    github: spalger/crystal-mime
-    commit: cb2b6b958bd7d27b9cf5a411a3c967113bc1c24c
-
   radix:
     github: luislavena/radix
-    version: 0.3.8
+    version: 0.3.9
 
