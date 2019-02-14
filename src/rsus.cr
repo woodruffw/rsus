@@ -53,14 +53,14 @@ module RSUS
                if uploaded_filename && uploaded_filename.includes?(".")
                  uploaded_filename.split(".", 2).last
                else
-                 "bin"
+                 ".bin"
                end
              else
                exts = MIME.extensions(content_type)
 
                # otherwise, try to get the extension from the content-type, falling back to
                # bin if the content-type isn't known
-               exts.first? || "bin"
+               exts.first? || ".bin"
              end
 
     "#{prefix}#{suffix}".tap do |fn|
