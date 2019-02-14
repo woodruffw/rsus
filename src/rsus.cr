@@ -51,12 +51,12 @@ module RSUS
                # if the file was uploaded without a content-type (or with a useless one),
                # try to guess the suffix from the filename (and fall back to bin)
                if uploaded_filename && uploaded_filename.includes?(".")
-                 uploaded_filename.split(".", 2).last
+                 File.extname uploaded_filename
                else
                  ".bin"
                end
              else
-               exts = MIME.extensions(content_type)
+               exts = MIME.extensions content_type
 
                # otherwise, try to get the extension from the content-type, falling back to
                # bin if the content-type isn't known
