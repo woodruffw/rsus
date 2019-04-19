@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe Rsus do
+describe RSUS do
   # TODO: Write tests
 
   it "works" do
