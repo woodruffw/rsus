@@ -1,5 +1,7 @@
 # RSUS
 
+[![Build Status](https://img.shields.io/github/workflow/status/woodruffw/rsus/CI/master)](https://github.com/woodruffw/rsus/actions?query=workflow%3ACI)
+
 A really simple upload service.
 
 ## Installation
