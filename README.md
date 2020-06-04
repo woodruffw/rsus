@@ -1,5 +1,6 @@
 # RSUS
 
+![license](https://raster.shields.io/badge/license-MIT%20with%20restrictions-green.png)
 [![Build Status](https://img.shields.io/github/workflow/status/woodruffw/rsus/CI/master)](https://github.com/woodruffw/rsus/actions?query=workflow%3ACI)
 
 A really simple upload service.
