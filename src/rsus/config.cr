@@ -2,17 +2,30 @@ require "yaml"
 
 module RSUS
   class Config
+    include YAML::Serializable
+
     CONFIG_FILE = "config.yml"
 
-    YAML.mapping(
-      environment: String,
-      site: String,
-      max_size: Int32,
-      store: String,
-      slug_size: Int32,
-      tokens: Hash(String, String),
-      logfile: String,
-    )
+    @[YAML::Field]
+    property environment : String
+
+    @[YAML::Field]
+    property site : String
+
+    @[YAML::Field]
+    property max_size : Int32
+
+    @[YAML::Field]
+    property store : String
+
+    @[YAML::Field]
+    property slug_size : Int32
+
+    @[YAML::Field]
+    property tokens : Hash(String, String)
+
+    @[YAML::Field]
+    property logfile : String
 
     def self.load : Config
       from_yaml(File.read(CONFIG_FILE)).tap do |c|
