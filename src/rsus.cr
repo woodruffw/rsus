@@ -26,6 +26,8 @@ module RSUS
         meta = part
         body = part.body.gets_to_end
       end
+    rescue
+      break error("completely busted form data")
     end
 
     @@config.log(:post, {auth: auth, user: @@config.tokens[auth]?})
