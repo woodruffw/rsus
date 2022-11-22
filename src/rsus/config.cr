@@ -31,7 +31,7 @@ module RSUS
       from_yaml(File.read(CONFIG_FILE)).tap do |c|
         c.store = File.join Kemal.config.public_folder, c.store
         Dir.mkdir_p(c.store) unless Dir.exists?(c.store)
-        ENV["KEMAL_ENV"] = c.environment
+        Kemal.config.env = c.environment
       end
     end
 
